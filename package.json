@@ -1,0 +1,91 @@
+{
+  "name": "angular-gridster2",
+  "version": "12.1.0",
+  "license": "MIT",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "serve": "ng serve",
+    "build": "ng build",
+    "build-lib": "ng build angular-gridster2",
+    "test": "ng test",
+    "test-lib": "ng test angular-gridster2",
+    "lint": "ng lint",
+    "build-demo": "ng build",
+    "build-npm": "ng build angular-gridster2",
+    "watch": "ng build --watch --configuration development",
+    "deploy": "ng deploy"
+  },
+  "homepage": "https://tiberiuzuld.github.io/angular-gridster2",
+  "bugs": {
+    "url": "https://github.com/tiberiuzuld/angular-gridster2/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tiberiuzuld/angular-gridster2.git"
+  },
+  "description": "Angular gridster 2",
+  "keywords": [
+    "angular",
+    "angular2",
+    "typescript",
+    "dashboard",
+    "gridster",
+    "gridster2",
+    "resize",
+    "drag&drop",
+    "widgets"
+  ],
+  "authors": [
+    "Tiberiu Zuld"
+  ],
+  "files": [
+    "dist/*"
+  ],
+  "dependencies": {
+    "@angular/animations": "12.2.6",
+    "@angular/cdk": "12.2.6",
+    "@angular/common": "12.2.6",
+    "@angular/compiler": "12.2.6",
+    "@angular/core": "12.2.6",
+    "@angular/forms": "12.2.6",
+    "@angular/material": "12.2.6",
+    "@angular/platform-browser": "12.2.6",
+    "@angular/platform-browser-dynamic": "12.2.6",
+    "@angular/router": "12.2.6",
+    "@fortawesome/fontawesome-free": "^5.15.4",
+    "@types/chart.js": "^2.9.34",
+    "angular-bootstrap-md": "^12.0.0",
+    "animate.css": "^4.1.1",
+    "chart.js": "^2.5.0",
+    "hammerjs": "^2.0.8",
+    "ngx-markdown": "12.0.1",
+    "rxjs": "6.6.7",
+    "tslib": "2.3.1",
+    "zone.js": "0.11.4"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "12.2.6",
+    "@angular-eslint/builder": "12.4.1",
+    "@angular-eslint/eslint-plugin": "12.4.1",
+    "@angular-eslint/eslint-plugin-template": "12.4.1",
+    "@angular-eslint/schematics": "12.4.1",
+    "@angular-eslint/template-parser": "12.4.1",
+    "@angular/cli": "12.2.6",
+    "@angular/compiler-cli": "12.2.6",
+    "@types/jasmine": "3.9.1",
+    "@types/node": "16.9.2",
+    "@typescript-eslint/eslint-plugin": "4.31.1",
+    "@typescript-eslint/parser": "4.31.1",
+    "angular-cli-ghpages": "1.0.0-rc.2",
+    "eslint": "7.32.0",
+    "jasmine-core": "3.9.0",
+    "karma": "6.3.4",
+    "karma-chrome-launcher": "3.1.0",
+    "karma-coverage": "2.0.3",
+    "karma-jasmine": "4.0.1",
+    "karma-jasmine-html-reporter": "1.7.0",
+    "ng-packagr": "12.2.1",
+    "typescript": "4.3.5"
+  }
+}
