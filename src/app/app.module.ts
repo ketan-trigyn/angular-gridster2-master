@@ -45,6 +45,7 @@ import {
 } from '@angular/material/card';
 import { TrackByItemComponent } from './sections/trackBy/trackByItem.component';
 import { DashboardComponent } from './sections/dashboard/dashboard.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
@@ -115,6 +116,7 @@ const appRoutes: Routes = [
     GridsterModule,
     MatMenuModule,
     MatCardModule,
+    NgxChartsModule,
     MDBBootstrapModule.forRoot(),
     MarkdownModule.forRoot({
       loader: HttpClient,

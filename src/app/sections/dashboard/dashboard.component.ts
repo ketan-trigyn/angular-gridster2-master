@@ -13,19 +13,71 @@ import {
   GridType,
   DisplayGrid
 } from 'angular-gridster2';
+import { single } from '../../data';
+
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
-
-  constructor() { }
+export class DashboardComponent implements OnInit { 
 
   options: GridsterConfig;
   dashboard: GridsterItem[];
   itemToPush: GridsterItemComponent;
+  single: any[];
+  multi: any[];
+  view: any[];
+
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  // options
+  gradient: boolean = false;
+  animations: boolean = true;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Country';
+  showYAxisLabel = true;
+  yAxisLabel = 'Population';
+  timeline: boolean = true;
+  xAxis: boolean = true;
+  yAxis: boolean = true;
+  legend: boolean = true;
+  legendPosition = 'below';
+
+  colorScheme = {
+    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+
+  labelFormatting(c) {
+    return `${(c.label)} Population`;
+  }
+
+  charts=[{'name':'bar'},{'name':'treemap'},{'name':'gauge'},{'name':'pie'}];
+  chartSelected='bar';
+
+  constructor() {
+    Object.assign(this, { single })
+  }
+
+  onSelect(event) {
+    console.log(event);
+  }
+
+  onOptionsSelected(data){
+    debugger;
+    console.log(data);
+  }
+
+  onActivate(data): void {
+    console.log('Activate', JSON.parse(JSON.stringify(data)));
+  }
+
+  onDeactivate(data): void {
+    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  }
 
   ngOnInit(): void {
     this.options = {
@@ -33,6 +85,7 @@ export class DashboardComponent implements OnInit {
       compactType: CompactType.None,
       pushItems: true,
       displayGrid: DisplayGrid.None,
+      disableScrollHorizontal:true,
       draggable: {
         enabled: true,
       },
@@ -46,6 +99,7 @@ export class DashboardComponent implements OnInit {
       { cols: 2, rows: 1, y: 0, x: 2 },
      
     ];
+
   }
 
   changedOptions(): void {
