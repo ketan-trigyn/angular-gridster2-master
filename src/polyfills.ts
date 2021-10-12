@@ -51,7 +51,7 @@
  *  with the following flag, it will bypass `zone.js` patch for IE/Edge
  *
  *  (window as any).__Zone_enable_cross_context_check = true;
- *
+ *  
  */
 
 /***************************************************************************************************
@@ -63,3 +63,5 @@ import 'zone.js'; // Included with Angular CLI.
 /***************************************************************************************************
  * APPLICATION IMPORTS
  */
+
+ (window as any)['global'] = window;

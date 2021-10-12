@@ -1,0 +1,65 @@
+<div class="options-header">
+  <button mat-mini-fab (click)="openDialog()" class="add-button cols-2">
+    <mat-icon>add</mat-icon>
+  </button>
+
+  <div style="margin-left: 10px;">
+
+    <!-- <mat-select style="width: 100px"  (change)='onOptionsSelected($event)' >
+        <mat-option *ngFor="let chart of charts"  >
+          {{chart.name}}
+        </mat-option>
+      </mat-select> -->
+    <!-- <select [(ngModel)]="chartSelected">
+      <option *ngFor="let chart of charts">{{chart.name}}</option>
+    </select> -->
+
+  </div>
+</div>
+
+
+
+<gridster [options]="options">
+  <gridster-item  [item]="item" *ngFor="let item of dashboard">
+    <div style="max-height: 100%;" #containerRef>
+      <div class="button-holder">
+        <!-- <button mat-mini-fab (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)">
+        <mat-icon (mousedown)="removeItem($event, item)" (touchstart)="removeItem($event, item)">close</mat-icon>
+      </button> -->
+        <mat-icon style="cursor: pointer;" (click)="editDialog(item)">settings</mat-icon>
+        <mat-icon style="cursor: pointer;">minimize</mat-icon>
+        <mat-icon style="cursor: pointer;">fullscreen</mat-icon>
+        <mat-icon style="cursor: pointer;" (mousedown)="removeItem($event, item)"
+          (touchstart)="removeItem($event, item)">
+          close</mat-icon>
+      </div>
+
+      <div *ngIf="item && item.chartType == 'bar'">
+        <ngx-charts-bar-vertical [view]="[containerRef.offsetWidth, containerRef.offsetHeight]" [results]="single"
+          [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+          [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+
+
+      </div>
+
+      <div *ngIf="item && item.chartType == 'treemap'">
+        <ngx-charts-tree-map [view]="[500, 400]" [results]="single" [gradient]="gradient" [animations]="animations"
+          [labelFormatting]="labelFormatting" (select)="onSelect($event)">
+        </ngx-charts-tree-map>
+      </div>
+
+      <div *ngIf="item && item.chartType == 'pie'">
+        <ngx-charts-pie-grid [view]="[500, 400]" [results]="single" (select)="onSelect($event)">
+        </ngx-charts-pie-grid>
+      </div>
+
+      <div *ngIf="item.chartType == 'gauge'">
+        <ngx-charts-gauge [view]="[500, 400]" [results]="single" [legend]="legend" (select)="onSelect($event)"
+          (activate)="onActivate($event)" (deactivate)="onDeactivate($event)">
+        </ngx-charts-gauge>
+      </div>
+    </div>
+  </gridster-item>
+</gridster>

@@ -1,0 +1,6 @@
+<ngx-charts-pie-grid *ngIf="data && data.value"
+[view]="[500,400]"
+  [results]="data.value"
+  [designatedTotal]="data.total"
+  (select)="onSelect($event)">
+</ngx-charts-pie-grid>

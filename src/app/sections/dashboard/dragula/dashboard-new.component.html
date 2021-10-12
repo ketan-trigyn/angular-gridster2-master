@@ -1,0 +1,71 @@
+<!-- <div class="grid-container" style="height: 615px; overflow: hidden;">
+    <mat-grid-list cols="8" rowHeight="1:1" gutterSize="15px">
+        <mat-grid-tile *ngFor="let card of cards; let i = index;" [colspan]="card.cols" [rowspan]="card.rows">
+            <div cdkDropList  [cdkDropListConnectedTo]="drops" [cdkDropListData]="i" >
+                <mat-card cdkDrag (cdkDragEntered)="entered($event)" [cdkDragData]="i" class="dashboard-card"
+                    [style.backgroundColor]="card.color">
+                    <mat-icon cdkDragHandle class="more-button">drag_handle</mat-icon>
+                    <mat-card-content class="dashboard-card-content">
+                        <h1>{{card.title}}</h1>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
+
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let movie of movies" cdkDrag>{{movie}}</div>
+</div> -->
+
+<div class="options-header">
+    <button mat-mini-fab (click)="openDialog()" class="add-button cols-2">
+        <mat-icon>add</mat-icon>
+    </button>
+</div>
+
+<div class="grid-container container" style="height: 615px;" dragula="VAMPIRES" [(dragulaModel)]="dashboard">
+    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="15px">
+        <mat-grid-tile #containerRef *ngFor="let item of dashboard let i = index;">
+            <div>
+                <mat-card class="dashboard-card" [ngClass]="{'fullscreen': item.isCardExpanded}"
+                    style="background-color: rgb(0, 255, 170);">
+                    <mat-icon class="more-button">drag_handle</mat-icon>
+                    <mat-icon (click)="expand(item)" style="cursor: pointer;">fullscreen</mat-icon>
+
+                    <mat-card-content class="dashboard-card-content">
+                        <h1>Sample Card</h1>
+                        <div *ngIf="item && item.chartType == 'bar'">
+                            <ngx-charts-bar-vertical [view]="[500,400]" [results]="single" [gradient]="gradient"
+                                [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend"
+                                [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel"
+                                [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" (select)="onSelect($event)">
+                            </ngx-charts-bar-vertical>
+
+
+                        </div>
+
+                        <div *ngIf="item && item.chartType == 'treemap'">
+                            <ngx-charts-tree-map [view]="[500, 400]" [results]="single" [gradient]="gradient"
+                                [animations]="animations" [labelFormatting]="labelFormatting"
+                                (select)="onSelect($event)">
+                            </ngx-charts-tree-map>
+                        </div>
+
+                        <div *ngIf="item && item.chartType == 'pie'">
+                            <ngx-charts-pie-grid [view]="[500, 400]" [results]="single" (select)="onSelect($event)">
+                            </ngx-charts-pie-grid>
+                        </div>
+
+                        <div *ngIf="item.chartType == 'gauge'">
+                            <ngx-charts-gauge [view]="[500, 400]" [results]="single" [legend]="legend"
+                                (select)="onSelect($event)" (activate)="onActivate($event)"
+                                (deactivate)="onDeactivate($event)">
+                            </ngx-charts-gauge>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

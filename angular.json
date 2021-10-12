@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/demo",
+            "outputPath": "dist/angular_dashboard",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -35,7 +35,8 @@
               "node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
               "node_modules/animate.css/animate.css",
               "src/styles.scss",
-              "src/theme.scss"
+              "src/theme.scss",
+              "node_modules/dragula/dist/dragula.css"
             ],
             "scripts": [
               "node_modules/marked/lib/marked.js",

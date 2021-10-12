@@ -15,6 +15,8 @@ import { GridsterModule } from 'angular-gridster2';
 import { MarkdownModule, MarkedOptions } from 'ngx-markdown';
 import { TrackByComponent } from './sections/trackBy/trackBy.component';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 import { AppComponent } from './app.component';
 import { ApiComponent } from './sections/api/api.component';
@@ -41,15 +43,31 @@ import { SwapComponent } from './sections/swap/swap.component';
 import { MultiLayerComponent } from './sections/multiLayer/multi-layer.component';
 import { MatMenuModule } from '@angular/material/menu';
 import {
-  MatCardModule 
+  MatCardModule
 } from '@angular/material/card';
 import { TrackByItemComponent } from './sections/trackBy/trackByItem.component';
-import { DashboardComponent } from './sections/dashboard/dashboard.component';
+import { DashboardComponent, DialogContentExampleDialog } from './sections/dashboard/gridster/dashboard.component';
+
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DashboardNewComponent, DialogContent } from './sections/dashboard/dragula/dashboard-new.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LayoutModule } from '@angular/cdk/layout';
+import { DragulaModule } from 'ng2-dragula';
+import { DashboardDynamicComponent } from './sections/dashboard/dashboard-dynamic/dashboard-dynamic.component';
+import { DashboardOutletDirective } from './sections/dashboard/dashboard-outlet.directive';
+import { DashboardCardComponent } from './sections/dashboard/dashboard-card/dashboard-card.component';
+import { HelloWorldComponent } from './sections/widget/hello-world/hello-world.component';
+import { HelloWorldContainer } from './sections/widget/hello-world/hello-world.container';
+import { BarChartComponent } from './sections/widget/bar-chart/bar-chart.component';
+import { BarChartContiner } from './sections/widget/bar-chart/bar-chart.container';
+import { PieChartComponent } from './sections/widget/pie-chart/pie-chart.component';
+import { PieChartContainer } from './sections/widget/pie-chart/pie-chart.container';
 
 const appRoutes: Routes = [
   { path: '', component: DashboardComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard-new', component: DashboardNewComponent },
+  { path: 'dashboard-dynamic', component: DashboardDynamicComponent },
   { path: 'api', component: ApiComponent },
   { path: 'compact', component: CompactComponent },
   { path: 'displayGrid', component: DisplayGridComponent },
@@ -98,7 +116,20 @@ const appRoutes: Routes = [
     TrackByItemComponent,
     MiscComponent,
     RtlComponent,
-    DashboardComponent,   
+    DashboardComponent,
+    DashboardOutletDirective,
+    DialogContentExampleDialog,
+    DashboardNewComponent,
+    DialogContent,
+    DashboardDynamicComponent,
+    DashboardOutletDirective,
+    DashboardCardComponent,
+    HelloWorldComponent,
+    HelloWorldContainer,
+    BarChartComponent,
+    BarChartContiner,    
+    PieChartComponent,
+    PieChartContainer
   ],
   imports: [
     BrowserModule,
@@ -116,8 +147,13 @@ const appRoutes: Routes = [
     GridsterModule,
     MatMenuModule,
     MatCardModule,
+    MatGridListModule,
     NgxChartsModule,
+    MatDialogModule,
+    DragDropModule,
+    LayoutModule,
     MDBBootstrapModule.forRoot(),
+    DragulaModule.forRoot(),
     MarkdownModule.forRoot({
       loader: HttpClient,
       markedOptions: {
@@ -128,5 +164,6 @@ const appRoutes: Routes = [
   ],
   providers: [],
   bootstrap: [AppComponent],
+  entryComponents: [HelloWorldContainer,BarChartContiner],
 })
-export class AppModule {}
+export class AppModule { }

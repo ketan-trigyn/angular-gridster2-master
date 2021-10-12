@@ -1,0 +1,45 @@
+<!-- <div class="board">
+    <div *ngFor="let track of tracks;let i = index">
+        <div dragula="dashboard" [dragulaModel]="track.items" (dragulaModelChange)="changed($event, i)" class="tracks">
+            <div *ngFor="let item of track.items">
+                <mat-card style="margin: 1rem;">
+                    <ng-template appDashboardOutlet [item]="item"></ng-template>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<!-- <div class="options-header">
+    <button mat-mini-fab (click)="openDialog()" class="add-button cols-2">
+        <mat-icon>add</mat-icon>
+    </button>
+</div> -->
+
+<div class="grid-container container" style="height: 615px;">
+    <mat-grid-list cols="2" rowHeight="1:1" gutterSize="15px">
+        <!-- <div *ngFor="let track of tracks;let j = index"> -->
+        <div dragula="dashboard" (dragulaModelChange)="changed($event)" [(dragulaModel)]="tracks" >
+            <mat-grid-tile #containerRef *ngFor="let item of tracks let i = index;" >
+                <div style="height: 100%;
+                width: 100%;">
+                    <mat-card class="dashboard-card" [ngClass]="{'fullscreen': item.isCardExpanded}" style="height: 100%;
+                    width: 100%;background-color: rgb(255, 255, 255);">
+                        <div class="widget-header">
+                            <div class="widget-title">{{item.name}}</div>
+                            <div class="widget-action">
+                                <mat-icon class="more-button">drag_handle</mat-icon>
+                                <mat-icon (click)="expand(item)" style="cursor: pointer;">fullscreen</mat-icon>
+                                <mat-icon style="cursor: pointer;" (mousedown)="removeItem($event, item)"
+                                    (touchstart)="removeItem($event, item)">
+                                    close</mat-icon>
+                            </div>
+                        </div>
+                        <ng-template appDashboardOutlet [item]="item"></ng-template>
+                    </mat-card>
+                </div>
+            </mat-grid-tile>
+        </div>
+        <!-- </div> -->
+    </mat-grid-list>
+</div>

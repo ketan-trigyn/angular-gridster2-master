@@ -1,0 +1,39 @@
+<h2 mat-dialog-title>Add Widget</h2>
+<mat-dialog-content class="mat-typography">
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Column</mat-label>
+            <input matInput [(ngModel)]="modelWidget.cols">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Row</mat-label>
+            <input matInput [(ngModel)]="modelWidget.rows">
+        </mat-form-field>
+    </div>
+    <div>
+        <mat-form-field appearance="fill">
+            <mat-label>Select</mat-label>
+            <mat-select [(ngModel)]="modelWidget.chartType">
+                <mat-option *ngFor="let chart of charts" [value]="chart.name">
+                    {{chart.name}}
+                </mat-option>
+            </mat-select>
+
+        </mat-form-field>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button [mat-dialog-close]="modelWidget" cdkFocusInitial>Apply</button>
+</mat-dialog-actions>
+
+<style>
+    :host {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+</style>

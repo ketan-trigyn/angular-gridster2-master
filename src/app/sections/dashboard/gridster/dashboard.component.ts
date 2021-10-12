@@ -2,6 +2,7 @@ import {
   ChangeDetectionStrategy,
   Component,
   OnInit,
+  Inject,
   ViewEncapsulation,
 } from '@angular/core';
 import {
@@ -13,7 +14,16 @@ import {
   GridType,
   DisplayGrid
 } from 'angular-gridster2';
-import { single } from '../../data';
+import { single } from '../../../data';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+export interface DialogData {
+  id: string,
+  cols: number,
+  rows: number,
+  x: number,
+  y: number,
+  chartType: string
+}
 
 
 @Component({
@@ -21,7 +31,7 @@ import { single } from '../../data';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit { 
+export class DashboardComponent implements OnInit {
 
   options: GridsterConfig;
   dashboard: GridsterItem[];
@@ -51,23 +61,21 @@ export class DashboardComponent implements OnInit {
     domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
   };
 
-  labelFormatting(c) {
-    return `${(c.label)} Population`;
+  constructor(public dialog: MatDialog) {
+    Object.assign(this, { single })
   }
 
-  charts=[{'name':'bar'},{'name':'treemap'},{'name':'gauge'},{'name':'pie'}];
-  chartSelected='bar';
 
-  constructor() {
-    Object.assign(this, { single })
+
+  labelFormatting(c) {
+    return `${(c.label)} Population`;
   }
 
   onSelect(event) {
     console.log(event);
   }
 
-  onOptionsSelected(data){
-    debugger;
+  onOptionsSelected(data) {
     console.log(data);
   }
 
@@ -85,7 +93,7 @@ export class DashboardComponent implements OnInit {
       compactType: CompactType.None,
       pushItems: true,
       displayGrid: DisplayGrid.None,
-      disableScrollHorizontal:true,
+      disableScrollHorizontal: true,
       draggable: {
         enabled: true,
       },
@@ -95,12 +103,15 @@ export class DashboardComponent implements OnInit {
     };
 
     this.dashboard = [
-      { cols: 2, rows: 1, y: 0, x: 0},
-      { cols: 2, rows: 1, y: 0, x: 2 },
-     
+      // { cols: 2, rows: 1, y: 0, x: 0,chartType:'bar' },
+      // { cols: 2, rows: 1, y: 0, x: 0,chartType:'treemap' },
+
     ];
 
   }
+
+  charts = [{ 'name': 'bar' }, { 'name': 'treemap' }, { 'name': 'gauge' }, { 'name': 'pie' }];
+  chartSelected = 'bar';
 
   changedOptions(): void {
     if (this.options.api && this.options.api.optionsChanged) {
@@ -108,15 +119,50 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  removeItem($event: MouseEvent | TouchEvent, item:any): void {
+  removeItem($event: MouseEvent | TouchEvent, item: any): void {
     $event.preventDefault();
     $event.stopPropagation();
     this.dashboard.splice(this.dashboard.indexOf(item), 1);
   }
 
   addItem(): void {
-    this.dashboard.push({ x: 0, y: 0, cols: 2, rows:1 });
+    this.dashboard.push({ x: 0, y: 0, cols: 1, rows: 1 });
   }
+  editDialog(dataWidget) {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog, {
+      width: '250px',
+      data: dataWidget
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      let existWidget = this.dashboard.find(a => a.id == result.id);
+
+      console.log(existWidget);
+      if (existWidget) {
+        existWidget.rows = result.rows,
+          existWidget.x = result.x,
+          existWidget.y = result.y,
+          existWidget.chartType = result.chartType,
+          existWidget.id = result.id
+      }
+    });
+  }
+
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog,);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(result);
+      setTimeout(() => {                           // <<<---using ()=> syntax
+        this.dashboard.push(result);
+      }, 100);
+
+      //this.dashboard.push({ x: 0, y: 0, cols: 1, rows: 1,chartType:'bar' });
+
+    });
+  }
+
+
 
   initItem(item: GridsterItem, itemComponent: GridsterItemComponent): void {
     this.itemToPush = itemComponent;
@@ -147,5 +193,47 @@ export class DashboardComponent implements OnInit {
       console.log(this.options.api.getItemComponent(this.dashboard[0]));
     }
   }
+
+}
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: 'dialog-content-example-dialog.html',
+})
+export class DialogContentExampleDialog {
+  modelWidget = {
+    cols: 1,
+    rows: 2,
+    x: 0,
+    y: 0,
+    chartType: 'bar',
+    id: this.guidGenerator()
+  }
+
+  charts = [{ 'name': 'bar' }, { 'name': 'treemap' }, { 'name': 'gauge' }, { 'name': 'pie' }];
+  chartSelected = 'bar';
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogContentExampleDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+    if (data) {
+      this.modelWidget.cols = data.cols,
+        this.modelWidget.rows = data.rows,
+        this.modelWidget.x = data.x,
+        this.modelWidget.y = data.y,
+        this.modelWidget.chartType = data.chartType,
+        this.modelWidget.id = data.id
+    }
+
+  }
+
+  guidGenerator() {
+    var S4 = function () {
+      return (((1 + Math.random()) * 0x10000) | 0).toString(16).substring(1);
+    };
+    return (S4() + S4() + "-" + S4() + "-" + S4() + "-" + S4() + "-" + S4() + S4() + S4());
+  }
+
 
 }
